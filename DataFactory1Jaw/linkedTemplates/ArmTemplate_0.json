@@ -298,7 +298,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/OutputData')]",
+			"name": "[concat(parameters('factoryName'), '/Parquet1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -311,12 +311,68 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "_SUCCESS",
 						"container": "jaw"
 					},
 					"compressionCodec": "snappy"
 				},
-				"schema": []
+				"schema": [
+					{
+						"name": "RECORDID",
+						"type": "UTF8"
+					},
+					{
+						"name": "RECORDTYPE",
+						"type": "UTF8"
+					},
+					{
+						"name": "BUSINESSNAME",
+						"type": "UTF8"
+					},
+					{
+						"name": "BUSINESSNAME2",
+						"type": "UTF8"
+					},
+					{
+						"name": "INDUSTRY",
+						"type": "UTF8"
+					},
+					{
+						"name": "FEESEQUENCEID",
+						"type": "INT32"
+					},
+					{
+						"name": "FEETYPE",
+						"type": "UTF8"
+					},
+					{
+						"name": "FEEDESCRIPTION",
+						"type": "UTF8"
+					},
+					{
+						"name": "FEEAMOUNT",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "FEEDATE",
+						"type": "DATE"
+					},
+					{
+						"name": "FEESTATUS",
+						"type": "UTF8"
+					},
+					{
+						"name": "PAYMENTAMOUNT",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "PAYMENTDATE",
+						"type": "UTF8"
+					},
+					{
+						"name": "TRANSACTIONTYPE",
+						"type": "UTF8"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageLS')]"
@@ -348,7 +404,7 @@
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "OutputData",
+								"referenceName": "Parquet1",
 								"type": "DatasetReference"
 							},
 							"name": "sink1"
@@ -435,6 +491,22 @@
 						"     skipDuplicateMapOutputs: true) ~> select2",
 						"ID sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
+						"     input(",
+						"          RECORDID as string,",
+						"          RECORDTYPE as string,",
+						"          BUSINESSNAME as string,",
+						"          BUSINESSNAME2 as string,",
+						"          INDUSTRY as string,",
+						"          FEESEQUENCEID as integer,",
+						"          FEETYPE as string,",
+						"          FEEDESCRIPTION as string,",
+						"          FEEAMOUNT as double,",
+						"          FEEDATE as date,",
+						"          FEESTATUS as string,",
+						"          PAYMENTAMOUNT as double,",
+						"          PAYMENTDATE as string,",
+						"          TRANSACTIONTYPE as string",
+						"     ),",
 						"     format: 'parquet',",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> sink1"
@@ -444,7 +516,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DCAFinesFees')]",
 				"[concat(variables('factoryId'), '/datasets/DCAPayments')]",
-				"[concat(variables('factoryId'), '/datasets/OutputData')]"
+				"[concat(variables('factoryId'), '/datasets/Parquet1')]"
 			]
 		},
 		{
