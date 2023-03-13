@@ -1,0 +1,76 @@
+{
+	"name": "Parquet1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "jaw"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "RECORDID",
+				"type": "UTF8"
+			},
+			{
+				"name": "RECORDTYPE",
+				"type": "UTF8"
+			},
+			{
+				"name": "BUSINESSNAME",
+				"type": "UTF8"
+			},
+			{
+				"name": "BUSINESSNAME2",
+				"type": "UTF8"
+			},
+			{
+				"name": "INDUSTRY",
+				"type": "UTF8"
+			},
+			{
+				"name": "FEESEQUENCEID",
+				"type": "INT32"
+			},
+			{
+				"name": "FEETYPE",
+				"type": "UTF8"
+			},
+			{
+				"name": "FEEDESCRIPTION",
+				"type": "UTF8"
+			},
+			{
+				"name": "FEEAMOUNT",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "FEEDATE",
+				"type": "DATE"
+			},
+			{
+				"name": "FEESTATUS",
+				"type": "UTF8"
+			},
+			{
+				"name": "PAYMENTAMOUNT",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "PAYMENTDATE",
+				"type": "UTF8"
+			},
+			{
+				"name": "TRANSACTIONTYPE",
+				"type": "UTF8"
+			}
+		]
+	}
+}

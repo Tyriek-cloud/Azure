@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "OutputData",
+						"referenceName": "Parquet1",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -109,6 +109,22 @@
 				"     skipDuplicateMapOutputs: true) ~> select2",
 				"ID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          RECORDID as string,",
+				"          RECORDTYPE as string,",
+				"          BUSINESSNAME as string,",
+				"          BUSINESSNAME2 as string,",
+				"          INDUSTRY as string,",
+				"          FEESEQUENCEID as integer,",
+				"          FEETYPE as string,",
+				"          FEEDESCRIPTION as string,",
+				"          FEEAMOUNT as double,",
+				"          FEEDATE as date,",
+				"          FEESTATUS as string,",
+				"          PAYMENTAMOUNT as double,",
+				"          PAYMENTDATE as string,",
+				"          TRANSACTIONTYPE as string",
+				"     ),",
 				"     format: 'parquet',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink1"
