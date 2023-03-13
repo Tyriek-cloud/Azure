@@ -1,0 +1,9 @@
+{
+	"name": "DataFactory1Jaw",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bb30a5d1-2837-44bc-bedc-60097923e240",
+		"tenantId": "e91f2f09-d9a7-4fd8-bfa9-e04bd73ecc91"
+	}
+}
