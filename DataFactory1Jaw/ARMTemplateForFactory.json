@@ -296,6 +296,106 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DCAFinesFees",
+								"type": "DatasetReference"
+							},
+							"name": "DCAFinesFesssource"
+						},
+						{
+							"dataset": {
+								"referenceName": "DCAPayments",
+								"type": "DatasetReference"
+							},
+							"name": "DCAPaymentssource"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DCAFinesFees",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "ID"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          {RECORD ID} as string,",
+						"          {RECORD TYPE} as string,",
+						"          {BUSINESS NAME} as string,",
+						"          {BUSINESS NAME2} as string,",
+						"          INDUSTRY as string,",
+						"          {FEE SEQUENCE ID} as integer,",
+						"          {FEE TYPE} as string,",
+						"          {FEE DESCRIPTION} as string,",
+						"          {FEE AMOUNT} as double,",
+						"          {FEE DATE} as date,",
+						"          {FEE STATUS} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> DCAFinesFesssource",
+						"source(output(",
+						"          {RECORD ID} as string,",
+						"          {RECORD TYPE} as string,",
+						"          {BUSINESS NAME} as string,",
+						"          {BUSINESS NAME2} as string,",
+						"          INDUSTRY as string,",
+						"          {FEE SEQUENCE ID} as integer,",
+						"          {FEE TYPE} as string,",
+						"          {FEE DESCRIPTION} as string,",
+						"          {PAYMENT AMOUNT} as double,",
+						"          {PAYMENT DATE} as string,",
+						"          {TRANSACTION TYPE} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> DCAPaymentssource",
+						"DCAFinesFesssource, DCAPaymentssource join(DCAFinesFesssource@{RECORD ID} == DCAPaymentssource@{RECORD ID},",
+						"     joinType:'outer',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> ID",
+						"ID sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          {RECORD ID} as string,",
+						"          {RECORD TYPE} as string,",
+						"          {BUSINESS NAME} as string,",
+						"          {BUSINESS NAME2} as string,",
+						"          INDUSTRY as string,",
+						"          {FEE SEQUENCE ID} as string,",
+						"          {FEE TYPE} as string,",
+						"          {FEE DESCRIPTION} as string,",
+						"          {FEE AMOUNT} as string,",
+						"          {FEE DATE} as string,",
+						"          {FEE STATUS} as string",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DCAFinesFees')]",
+				"[concat(variables('factoryId'), '/datasets/DCAPayments')]"
+			]
 		}
 	]
 }
