@@ -223,6 +223,79 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageLS')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DCAPayments')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Payments_Received_for_DCA_Fines_and_Fees.csv",
+						"container": "jaw"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "RECORD ID",
+						"type": "String"
+					},
+					{
+						"name": "RECORD TYPE",
+						"type": "String"
+					},
+					{
+						"name": "BUSINESS NAME",
+						"type": "String"
+					},
+					{
+						"name": "BUSINESS NAME2",
+						"type": "String"
+					},
+					{
+						"name": "INDUSTRY",
+						"type": "String"
+					},
+					{
+						"name": "FEE SEQUENCE ID",
+						"type": "String"
+					},
+					{
+						"name": "FEE TYPE",
+						"type": "String"
+					},
+					{
+						"name": "FEE DESCRIPTION",
+						"type": "String"
+					},
+					{
+						"name": "PAYMENT AMOUNT",
+						"type": "String"
+					},
+					{
+						"name": "PAYMENT DATE",
+						"type": "String"
+					},
+					{
+						"name": "TRANSACTION TYPE",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageLS')]"
+			]
 		}
 	]
 }
