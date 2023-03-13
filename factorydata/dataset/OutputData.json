@@ -1,0 +1,20 @@
+{
+	"name": "OutputData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "_SUCCESS",
+				"container": "jaw"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

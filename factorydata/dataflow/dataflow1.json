@@ -109,9 +109,9 @@
 				"     skipDuplicateMapOutputs: true) ~> select2",
 				"ID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     format: 'parquet',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     format: 'parquet') ~> sink1"
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
