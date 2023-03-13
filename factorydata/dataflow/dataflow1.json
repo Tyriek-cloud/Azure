@@ -73,9 +73,9 @@
 				"     broadcast: 'auto')~> ID",
 				"ID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'parquet',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     format: 'parquet') ~> sink1"
 			]
 		}
 	}
