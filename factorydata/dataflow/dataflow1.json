@@ -72,7 +72,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> DCAPaymentssource",
-				"select1, DCAPaymentssource join(select1@RECORD ID == {RECORD ID},",
+				"select1, select2 join(select1@RECORDID == select2@RECORDID,",
 				"     joinType:'outer',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
