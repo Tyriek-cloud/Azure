@@ -31,6 +31,9 @@
 			"transformations": [
 				{
 					"name": "ID"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -66,11 +69,26 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> DCAPaymentssource",
-				"DCAFinesFesssource, DCAPaymentssource join(DCAFinesFesssource@{RECORD ID} == DCAPaymentssource@{RECORD ID},",
+				"select1, DCAPaymentssource join(select1@RECORD ID == {RECORD ID},",
 				"     joinType:'outer',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> ID",
+				"DCAFinesFesssource select(mapColumn(",
+				"          RECORDID = {RECORD ID},",
+				"          RECORDTYPE = {RECORD TYPE},",
+				"          BUSINESSNAME = {BUSINESS NAME},",
+				"          BUSINESSNAME2 = {BUSINESS NAME2},",
+				"          INDUSTRY,",
+				"          FEESEQUENCEID = {FEE SEQUENCE ID},",
+				"          FEETYPE = {FEE TYPE},",
+				"          FEEDESCRIPTION = {FEE DESCRIPTION},",
+				"          FEEAMOUNT = {FEE AMOUNT},",
+				"          FEEDATE = {FEE DATE},",
+				"          FEESTATUS = {FEE STATUS}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
 				"ID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
