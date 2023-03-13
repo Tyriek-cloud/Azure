@@ -34,6 +34,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
@@ -89,6 +92,21 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
+				"DCAPaymentssource select(mapColumn(",
+				"          RECORDID = {RECORD ID},",
+				"          RECORDTYPE = {RECORD TYPE},",
+				"          BUSINESSNAME = {BUSINESS NAME},",
+				"          BUSINESSNAME2 = {BUSINESS NAME2},",
+				"          INDUSTRY,",
+				"          FEESEQUENCEID = {FEE SEQUENCE ID},",
+				"          FEETYPE = {FEE TYPE},",
+				"          FEEDESCRIPTION = {FEE DESCRIPTION},",
+				"          PAYMENTAMOUNT = {PAYMENT AMOUNT},",
+				"          PAYMENTDATE = {PAYMENT DATE},",
+				"          TRANSACTIONTYPE = {TRANSACTION TYPE}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
 				"ID sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
