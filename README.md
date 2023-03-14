@@ -1,2 +1,2 @@
-# Azure
-For Microsoft Azure related projects.
+# Cloud Projects
+For Cloud related projects.
